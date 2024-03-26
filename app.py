@@ -2,15 +2,24 @@ from flask import Flask, request, render_template
 import google.generativeai as palm
 palm.configure(api_key="AIzaSyC-Ss6rUvCZNAxG5saZBcwzy3TO66BlNXU")
 model = {'model': "models/chat-bison-001"}
+
+name=""
+flag=1
+
 app = Flask(__name__)
 
 @app.route("/",methods=["GET", "POST"])
 def index():
+    global flag
+    flag = 1
     return render_template("index.html")
 
 @app.route("/main",methods=["GET", "POST"])
 def main():
-    name = request.form.get("name")
+    global flag, name
+    if flag == 1:
+        name = request.form.get("name")
+        flag = 0
     return (render_template("main.html", r= name))
 
 @app.route("/palm_request",methods=["GET", "POST"])
