@@ -4,7 +4,6 @@ import replicate
 import os
 import time
 
-os.environ['REPLICATE_API_TOKEN']
 palm.configure(api_key=os.environ['PALM_API_TOKEN'])
 model = {'model': "models/chat-bison-001"}
 
